@@ -32,6 +32,39 @@ equations =  [
 # Problem 
 @named seir = ODESystem(equations)
 
+
+
+
+
+
+
+# Figure 2A
+
 u0 = [S => , A => , I => , R => , Q => ]
-p = [ β => , e => , fs => , fr => , s => ,ft => , fq => ]
+p = [ β => , e => , fs => , fr => , s => 0.9, ft => , fq => ]
 tspan = (0., 100.)
+
+
+
+
+
+
+# Figure 2B
+
+
+
+
+
+
+
+
+# Figure 3A
+
+
+
+
+
+
+
+
+# Figure 3B
