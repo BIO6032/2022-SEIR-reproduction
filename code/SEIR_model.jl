@@ -28,3 +28,9 @@ equations =  [
     D(Q) ~ fq*I + s*ft*a - fr*Q,
     D(R) ~ fr*Q + fr*I + fr*A
 ]
+
+# Problem 
+@named seir = ODESystem(equations)
+
+u0 = [S => , A => , I => , R => Q => ]
+p = []
