@@ -25,6 +25,11 @@ authors:
 
   - name: Aude Rebattet
     email: aude.rebattet@umontreal.ca
+    
+     - name: Sarahdghyn Louissaint
+    orcid: 0000-0001-6998-558X
+    email: sarahdghyn.louissaint@umontreal.ca
+    affiliations: 1
   
 # List of affiliations with code (corresponding to author affiliations), name
 # and address. You can also use these affiliations to add text such as "Equal
