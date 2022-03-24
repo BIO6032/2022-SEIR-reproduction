@@ -12,6 +12,7 @@ title: "ReScience (R)evolution"
 authors:
   - name: Marine Hubert  
     email: marine.hubert@umontreal.ca
+    orcid: 0000-0002-6054-6895
     affiliations: 1
     
   - name: Timothée Poisot
@@ -21,16 +22,25 @@ authors:
     
   - name: Brandon Blanchette
     email: brandon.blanchette@umontreal.ca 
+    orcid: 0000-0003-2123-3084
     affiliations: 1
 
   - name: Aude Rebattet
     email: aude.rebattet@umontreal.ca
     
-     - name: Sarahdghyn Louissaint
+  - name: Sarahdghyn Louissaint
     orcid: 0000-0001-6998-558X
     email: sarahdghyn.louissaint@umontreal.ca
     affiliations: 1
+
+  - name: Salomé Bouskila
+    email: salome.bouskila@umontreal.ca 
+    orcid: 0000-0003-0193-5441
+    affiliations: 1,2
   
+  - name: Andi Hanna
+    email: andi.alkayat@umontreal.ca
+
 # List of affiliations with code (corresponding to author affiliations), name
 # and address. You can also use these affiliations to add text such as "Equal
 # contributions" as name (with no address).
