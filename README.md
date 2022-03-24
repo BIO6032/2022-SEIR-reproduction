@@ -1,32 +1,11 @@
-### [ReScience C](https://rescience.github.io/) article template
+The main objective of this work is to replicate the model presented in "[A simple model for control of COVID-19 infections on an urban campus][article]" by Robert Brown. This article presents a modified SEIR model on COVID-19 transmission on an urban campus and is verified using data collected in Fall 2020. Specifically, by exctracting the data used for the suggested study, we will run the same SEIR model and generate figures 1 to 3 to verify the replicability of the article.
 
-This repository contains the Latex (optional) template for writing a ReScience
-C article and the (mandatory) YAML metadata file. For the actual article,
-you're free to use any software you like as long as you enforce the proposed
-PDF style. A tool is available for the latex template that produces latex
-definitions from the metadata file. If you use another software, make sure that
-metadata and PDF are always synced.
-
-You can also use overleaf with the [provided template](https://www.overleaf.com/read/kfrwdmygjyqw) but in this case, you'll have to enter `metadata.tex` manually.
-
-#### Usage
-
-For a submission, fill in information in
-[metadata.yaml](./metadata.yaml), modify [content.tex](content.tex)
-and type:
-
-```bash
-$ make 
-```
-
-This will produce an `article.pdf` using xelatex and provided font. Note that you must have Python 3 and [PyYAML](https://pyyaml.org/) installed on your computer, in addition to `make`.
+[article]: https://...
 
 
-After acceptance, you'll need to complete [metadata.yaml](./metadata.yaml) with information provided by the editor and type again:
+### Intellectual property
 
-```bash
-$ make
-```
+#### Article template
 
 (C) 2015-2020, Nicolas Rougier + co-authors GPL-3+, Apache v2+, SIL Open Font License
 
@@ -37,3 +16,6 @@ source-serif-pro/; have their free licences indicated with a
 under the GPL version 3 or later, at your choosing, by Nicolas Rougier
 and co-authors, 2015-2020. See the file COPYING for details of the
 GPL-3 licence.
+
+#### Model
+
