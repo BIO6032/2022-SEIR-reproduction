@@ -12,9 +12,12 @@ using CSV: CSV
 
 
 # Parameters 
-@parameters
+@parameters t β e fs fr s ft fq
 
 # Variables
-@variables 
+@variables S(t) A(t) I(t) R(t) Q(t)
 
 # Differential
+D = Differential(t)
+
+# Equations 
