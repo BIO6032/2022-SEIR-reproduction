@@ -32,5 +32,6 @@ equations =  [
 # Problem 
 @named seir = ODESystem(equations)
 
-u0 = [S => , A => , I => , R => Q => ]
-p = []
+u0 = [S => , A => , I => , R => , Q => ]
+p = [ β => , e => , fs => , fr => , s => ,ft => , fq => ]
+tspan = (0., 100.)
