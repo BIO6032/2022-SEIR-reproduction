@@ -8,7 +8,7 @@ R. Brown suggested a SEIR - susceptible-exposed-infectious-recovered - models wi
 ▪	Infectious and asymptomatic A(t)
 ▪	Recovered R(t)
 ▪	Quarantine Q(t)
-Where susceptibles individuals belonging to the campus community S(t) become infected with infection rate β. Infection is believed to be transmitted to the susceptible population in 3 ways; from infectious and symptomatic individuals I(t), infectious and asymptomatic individuals A(t) or coming from the outside of the community, which was called exogenous cases E(t). Individuals from either group become recovered at rate fR while infectious and asymptomatic individuals only are tested at rate fT. Finally, infectious and symptomatic persons go to quarantine at rate fQ. 
+Where susceptibles individuals belonging to the campus community S(t) become infectious and asymptomatic at infection rate β. Infection is transmitted to the susceptible population in 3 ways; from infectious and symptomatic individuals I(t), infectious and asymptomatic individuals A(t) or come from the community outside the campus, which are considered exogenous cases and represented by the variable E(t). Individuals from either group become recovered at rate fR while infectious and asymptomatic individuals only are tested at rate fT. Finally, infectious and symptomatic persons go to quarantine at rate fQ. 
 
 ### Intellectual property
 
