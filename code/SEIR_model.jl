@@ -21,3 +21,10 @@ using CSV: CSV
 D = Differential(t)
 
 # Equations 
+equations = [
+    D(S) ~ -β*S*A - β*S*Ifq*I - e*S,
+    D(A) ~ fq*I + s  ,
+    D(I) ~ fs*A - fr*I - fq*I,
+    D(Q) ~ fq*I + s*ft*a - fr*Q,
+    D(R) ~ fr*Q + fr*I + fr*A
+]
