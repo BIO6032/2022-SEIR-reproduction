@@ -22,7 +22,7 @@ D = Differential(t)
 
 # Equations 
 equations =  [
-    D(S) ~ -β*S*A - β*S*Ifq*I - e*S,
+    D(S) ~ -β*S*A - β*S*I - e*S,
     D(A) ~ β*S*A + β*S*I - fs*A - fr*A - s*ft*A + e*S,
     D(I) ~ fs*A - fr*I - fq*I,
     D(Q) ~ fq*I + s*ft*a - fr*Q,
