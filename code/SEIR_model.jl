@@ -8,7 +8,7 @@ using Plots
 
 # Data
 using DataFrames
-#using CSV:CSV
+using CSV:CSV
 
 # Parameters 
 @parameters t β e fs fr s ft fq
