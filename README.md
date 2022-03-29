@@ -3,11 +3,13 @@ The main objective of this work is to replicate the model presented in "[A simpl
 [article]: https://...
 
 R. Brown suggested a SEIR - susceptible-exposed-infectious-recovered - models with 5 compartments;
-▪	Susceptibles (S)
-▪	Infectious and symptomatic I(t)
-▪	Infectious and asymptomatic A(t)
-▪	Recovered R(t)
-▪	Quarantine Q(t)
+
+-	Susceptibles (S)
+-	Infectious and symptomatic I(t)
+-	Infectious and asymptomatic A(t)
+-	Recovered R(t)
+-	Quarantine Q(t)
+
 Where susceptibles individuals belonging to the campus community S(t) become infectious and asymptomatic at infection rate β. Infection is transmitted to the susceptible population from infectious and symptomatic individuals I(t) or infectious and asymptomatic individuals A(t) from the campus. However, infection can also be acquired from an external individual, and is therefore represented as an exogenous input of rate E(tau). 
 
 The infectious and symptomatic individuals are moved to quarantine Q(t) at the rate fq, while infectious and asymptomatic individuals are placed in quarantine at rate ft when tested positive. The rate at which asymptomatic and infectious individuals are placed into quarantine is also regulated by the parameter s which takes into account test sensitiivity, indeterminate tests and individuals who miss their tests. Individuals recovered at a rate fr. All quarantined individuals will subsequently recover at the same fr rate as the unidentified infectious and asymptomatic individuals.
