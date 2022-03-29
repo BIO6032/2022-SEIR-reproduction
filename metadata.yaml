@@ -34,13 +34,13 @@ authors:
     email: sarahdghyn.louissaint@umontreal.ca
     affiliations: 1
     
+  - name: Aude Rebattet
+    email: aude.rebattet@umontreal.ca
+
   - name: Timothée Poisot
     orcid: 0000-0002-0735-5184 
     email: timothee.poisot@umontreal.ca
     affiliations: 1,2,*
-    
-  - name: Aude Rebattet
-    email: aude.rebattet@umontreal.ca
 
 # List of affiliations with code (corresponding to author affiliations), name
 # and address. You can also use these affiliations to add text such as "Equal
