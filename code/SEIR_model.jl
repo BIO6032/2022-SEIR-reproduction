@@ -31,7 +31,11 @@ equations =  [
 
 # Problem 
 @named seir = ODESystem(equations)
+problem = ODEProblem(seir,U₀, (0,100.), p)
+solution = solve(problem)
 
+# Graphique représentant le modèle SEIR
+plot(solution; dpi=600, frame=:box)
 
 
 ## Models ##
