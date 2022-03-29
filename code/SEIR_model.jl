@@ -30,13 +30,13 @@ equations =  [
 
 # Problem 
 @named seir = ODESystem(equations)
-u0 = [S => , A => , I => , R => , Q => ]
+u0 = [S => 9999 , A => 1 , I => 0, R => 0, Q => 0]
 tspan = (0., 100.)
 
 # Simulations
 for r0 in [2.5, 3.8, 4.0, 5.0, 6.0, 6.5, 8.0]
     # TODO formula for parameters from R0
-    p = [ β => , e => , fs => , fr => , s => 0.9, ft => , fq => ]
+    p = [ β => b, e => 0.00004 , fs => 0.6, fr => 1/14 , s => 0.9, ft => 2/7 , fq => 0.9]
     problem = ODEProblem(seir, u0, tspan, p)
     solution = solve(problem)
     plot(solution; dpi=600, frame=:box)
