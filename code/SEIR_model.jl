@@ -10,7 +10,6 @@ using Plots
 using DataFrames
 using CSV: CSV
 
-
 # Parameters 
 @parameters t β e fs fr s ft fq
 
@@ -31,78 +30,16 @@ equations =  [
 
 # Problem 
 @named seir = ODESystem(equations)
-problem = ODEProblem(seir,U₀, (0,100.), p)
-solution = solve(problem)
-
-# Graphique représentant le modèle SEIR
-plot(solution; dpi=600, frame=:box)
-
-
-## Models ##
-
-
-
-# R_0 = 8.0
-
-
-
-
-# R_0 = 6.5 
-
-
-
-
-# R_0 = 6.0 
-
-
-
-
-# R_0 = 5.0
-
-
-
-
-# R_0 = 4.0 
-
-
-
-
-# R_0 = 3.8
-
-
-
-
-# R_0 = 2.5 
-
-
-
-# Figure 2A
-
 u0 = [S => , A => , I => , R => , Q => ]
-p = [ β => , e => , fs => , fr => , s => 0.9, ft => , fq => ]
 tspan = (0., 100.)
 
-
-
-
-
-
-# Figure 2B
-
-
-
-
-
-
-
-
-# Figure 3A
-
-
-
-
-
-
-
-
-# Figure 3B
+# Simulations
+for r0 in [2.5, 3.8, 4.0, 5.0, 6.0, 6.5, 8.0]
+    # TODO formula for parameters from R0
+    p = [ β => , e => , fs => , fr => , s => 0.9, ft => , fq => ]
+    problem = ODEProblem(seir, u0, tspan, p)
+    solution = solve(problem)
+    plot(solution; dpi=600, frame=:box)
+    savefig(joinpath("figures", "simulation_$(r0).png"))
+    # TODO save data to a CSV file
+end
