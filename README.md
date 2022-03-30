@@ -12,9 +12,9 @@ R. Brown suggested a SEIR - susceptible-exposed-infectious-recovered - models wi
 -	Recovered R(t)
 -	Quarantine Q(t)
 
-Where susceptibles individuals belonging to the campus community S(t) become infectious and asymptomatic at infection rate β. Infection is transmitted to the susceptible population from infectious and symptomatic individuals I(t) or infectious and asymptomatic individuals A(t) from the campus. However, infection can also be acquired from an external individual, and is therefore represented as an exogenous input of rate E(tau). 
+Where susceptibles individuals belonging to the campus community S(t) become infectious and asymptomatic at infection rate β. Infection is transmitted to the susceptible population from infectious and symptomatic individuals I(t) or infectious and asymptomatic individuals A(t) from the campus. However, infection can also be acquired from an external individual, and is therefore represented as an exogenous input of rate E (τ). 
 
-The infectious and symptomatic individuals are moved to quarantine Q(t) at the rate fq, while infectious and asymptomatic individuals are placed in quarantine at rate ft when tested positive. The rate at which asymptomatic and infectious individuals are placed into quarantine is also regulated by the parameter s which takes into account test sensitiivity, indeterminate tests and individuals who miss their tests. Individuals recovered at a rate fr. All quarantined individuals will subsequently recover at the same fr rate as the unidentified infectious and asymptomatic individuals.
+Infectious and symptomatic individuals move to quarantine Q(t) at rate fq, while infectious and asymptomatic individuals are placed in quarantine at rate ft when tested positive. The rate at which asymptomatic and infectious individuals are placed into quarantine is regulated by the parameter s which takes into account test sensitivity, indeterminate tests and individuals who miss their tests. Therefore, s is the fraction of I(t) Individuals detected as positive by the testing method and that directly goes into quarantine. All individuals recover at rate fr. 
 
 ```mermaid
 graph TD
@@ -29,7 +29,6 @@ graph TD
     I --> b
     A --> b
 ```
-
 ### Intellectual property
 
 #### Article template
