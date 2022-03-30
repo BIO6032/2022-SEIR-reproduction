@@ -29,6 +29,7 @@ graph TD
     I --> b
     A --> b
 ```
+![SEIR drawio (1)](https://user-images.githubusercontent.com/101202074/160874716-e16d659b-918b-4fdf-a4d8-ec89260212b0.png)
 
 ### Intellectual property
 
