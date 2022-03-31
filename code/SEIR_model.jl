@@ -66,4 +66,6 @@ tspan = (0.0, 100.0)
     # TODO save data to a CSV file
 #end
 
+#CT(t) ≡ (Ss + sfTTR)[A(t)/TR]
+CT = [(0.6 + 0.9*(2/7)*14) * A/14] # TODO modifier pour que ca fonctionne
 
