@@ -35,8 +35,9 @@ tspan = (0.0, 100.0)
 
 
 # Simulations
-for r0 in [2.5, 3.8, 4.0, 5.0, 6.0, 6.5, 8.0]
+#for r0 in [2.5, 3.8, 4.0, 5.0, 6.0, 6.5, 8.0]
     # TODO formula for parameters from R0
+    r0 = 8.
     p = [
         fr => 1 / 14,
         β => r0 * fr / (S + A + I + R + Q),
@@ -48,9 +49,21 @@ for r0 in [2.5, 3.8, 4.0, 5.0, 6.0, 6.5, 8.0]
     ]
     problem = ODEProblem(seir, u0, tspan, p)
     solution = solve(problem);
+   
+    Reff = r0 / (1 + 0.6 + s * ft * 14)
+
+    S = solution[1,:]
+    A = solution[2,:]
+    I = solution[3,:]
+    R = solution[4,:]
+    Q = solution[5,:]
+
+    typeof(S)
+    
+    plot( solution.t,S)
     plot(solution; dpi = 600, frame = :box)
     #savefig(joinpath("figures", "simulation_$(r0).png"))
     # TODO save data to a CSV file
-end
+#end
 
 
