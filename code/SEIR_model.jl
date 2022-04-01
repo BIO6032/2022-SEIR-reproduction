@@ -48,24 +48,42 @@ tspan = (0.0, 100.0)
         fq => 0.1
     ]
     problem = ODEProblem(seir, u0, tspan, p)
-    solution = solve(problem);
-   
-    Reff = r0 / (1 + 0.6 + s * ft * 14)
+    solution = solve(problem)
 
+   # Visualize the solution
+    plot(solution; dpi=600, frame=:box)
+    
+    M = solution[1:end,:] # Matrix of results 5 compartments x 31 time steps
+    
+    # Assign values to each compartment over time
     S = solution[1,:]
     A = solution[2,:]
     I = solution[3,:]
     R = solution[4,:]
     Q = solution[5,:]
 
-    typeof(S)
-    
-    plot( solution.t,S)
+    # Get Parameters values
+    fr = p[1][2]
+    β = p[2][2]
+    e = p[3][2]
+    fs = p[4][2]
+    s = p[5][2]
+    ft = p[6][2]
+    fq = p[7][2]
+    Ss = 0.6 #constant given in the article (#To verify)
+    Tr = 14 #given in the article (number of days of infection)
+
+    plot(solution.t,S) #plot(x,y)
     plot(solution; dpi = 600, frame = :box)
     #savefig(joinpath("figures", "simulation_$(r0).png"))
     # TODO save data to a CSV file
 #end
 
-#CT(t) ≡ (Ss + sfTTR)[A(t)/TR]
-CT = [(0.6 + 0.9*(2/7)*14) * A/14] # TODO modifier pour que ca fonctionne
+# Estimate the number of cases 
+# Formula: CT(t) ≡ (Ss + sfTTR)[A(t)/Tr]
+CT = (0.6 + 0.9*(2/7)*14) * (A/14) # TODO modifier pour que ca fonctionne
+CT = (Ss + s*ft*Tr) * (A/Tr)
 
+
+#TODO
+Reff = r0 / (1 + 0.6 + s * ft * 14)
