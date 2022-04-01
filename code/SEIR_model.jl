@@ -14,7 +14,7 @@ using CSV:CSV
 @parameters t β e fs fr s ft fq
 
 # Variables
-@variables S(t) A(t) I(t) R(t) Q(t)
+@variables S(t) A(t) I(t) R(t) Q(t) 
 
 # Differential
 D = Differential(t)
@@ -71,7 +71,7 @@ tspan = (0.0, 100.0)
     ft = p[6][2]
     fq = p[7][2]
     Ss = 0.6 #constant given in the article (#To verify)
-    Tr = 14 #given in the article (number of days of infection)
+    Tr = 14. #given in the article (number of days of infection)
 
     plot(solution.t,S) #plot(x,y)
     plot(solution; dpi = 600, frame = :box)
@@ -79,10 +79,19 @@ tspan = (0.0, 100.0)
     # TODO save data to a CSV file
 #end
 
-# Estimate the number of cases 
+
+
+# ===> NOT WORKING RN ===>
+# TODO C according to time -> as a function C(t) ?
+
+# Estimate the number of cases C(t) 
 # Formula: CT(t) ≡ (Ss + sfTTR)[A(t)/Tr]
-CT = (0.6 + 0.9*(2/7)*14) * (A/14) # TODO modifier pour que ca fonctionne
-CT = (Ss + s*ft*Tr) * (A/Tr)
+@variables C(t)
+#C => [(Ss + s*ft*Tr) * (A/Tr) ] # C as vector with [] ?
+
+C ~ (Ss + s*ft*Tr) * (A/Tr)  # C
+plot(C)
+
 
 
 #TODO
