@@ -30,23 +30,31 @@ equations = [
 
 # Problem 
 @named seir = ODESystem(equations)
-u0 = [S => 9999, A => 1, I => 0, R => 0, Q => 0]
+S0 = 9999.
+A0 = 1.
+I0 = 0.
+R0 = 0.
+Q0 = 0.
+u0 = [S => S0, A => A0, I => I0, R => R0, Q => Q0]
 tspan = (0.0, 100.0)
 
 
 # Simulations
-#for r0 in [2.5, 3.8, 4.0, 5.0, 6.0, 6.5, 8.0]
-    # TODO formula for parameters from R0
-    r0 = 8.
+plot()
+for r0 in 2:8
+    # TODO formula for parameters from r0
+    #r0 = 8.
 
     # Get Parameters values
     _fr = 1/14
-    _β = r0 * _fr / (S + A + I + R + Q)
+    #_β = r0 * _fr / _Tr 
+    _N = S0+A0+I0+R0+Q0
     _e = 4 / 10000
     _fs = 0.6 * _fr
     _s = 0.9
     _ft = 2/7
-    _fq = 0.1
+    _fq = 0.005
+    _β = (r0*(_fs+_fr+_s*_ft))/_N
     _Ss = 0.6 #constant given in the article (#To verify)
     _Tr = 14. #given in the article (number of days of infection)
 
@@ -62,10 +70,7 @@ tspan = (0.0, 100.0)
     ]
     problem = ODEProblem(seir, u0, tspan, p)
     solution = solve(problem)
-
-   # Visualize the solution
-    plot(solution; dpi=600, frame=:box)
-    
+  
     M = solution[1:end,:] # Matrix of results 5 compartments x 31 time steps
     
     # Assign values to each compartment over time
@@ -75,23 +80,11 @@ tspan = (0.0, 100.0)
     Q = solution[4,:]
     R = solution[5,:]
 
-    plot(solution.t,R; dpi = 600, frame = :box) #plot(x,y)
-    #savefig(joinpath("figures", "simulation_$(r0).png"))
-    # TODO save data to a CSV file
-#end
-
-
-# ===> NOT WORKING RN ===>
-# TODO C according to time -> as a function C(t) ?
-
-# Estimate the number of cases C(t) 
-# Formula: CT(t) ≡ (Ss + sfTTR)[A(t)/Tr]
-#C => [(Ss + s*ft*Tr) * (A/Tr) ] # C as vector with [] ?
-
-C = cumsum((Ss + _s*_ft*_Tr) * (A/_Tr))
-
-plot(solution.t,C)
-
+    
+    C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
+    plot!(solution.t,C, lab=r0)
+end
+xaxis!(tspan...)
 
 # Try with different R0 values --> Figure 2A
 
@@ -107,7 +100,7 @@ Reff = r0 / (1 + Ss + s * ft * Tr)
 # Find the R0 used for the numerical solution(eq 1-5)
 
 # Parameters
-R₀ = 
+R₀ = β*N/fr
 
 # Expression 10 
 A = (Reff/1-Reff)*(NE₀*Tr/R₀)
