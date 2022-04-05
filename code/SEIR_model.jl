@@ -38,14 +38,27 @@ tspan = (0.0, 100.0)
 #for r0 in [2.5, 3.8, 4.0, 5.0, 6.0, 6.5, 8.0]
     # TODO formula for parameters from R0
     r0 = 8.
+
+    # Get Parameters values
+    _fr = 1/14
+    _β = r0 * _fr / (S + A + I + R + Q)
+    _e = 4 / 10000
+    _fs = 0.6 * _fr
+    _s = 0.9
+    _ft = 2/7
+    _fq = 0.1
+    _Ss = 0.6 #constant given in the article (#To verify)
+    _Tr = 14. #given in the article (number of days of infection)
+
+
     p = [
-        fr => 1 / 14,
-        β => r0 * fr / (S + A + I + R + Q),
-        e => 4 / 10000,
-        fs => 0.6 * fr,
-        s => 0.9,
-        ft => 2 / 7,
-        fq => 0.1
+        fr => _fr,
+        β => _β,
+        e => _e,
+        fs => _fs,
+        s => _s,
+        ft => _ft,
+        fq => _fq
     ]
     problem = ODEProblem(seir, u0, tspan, p)
     solution = solve(problem)
@@ -62,23 +75,10 @@ tspan = (0.0, 100.0)
     Q = solution[4,:]
     R = solution[5,:]
 
-    # Get Parameters values
-    fr = p[1][2]
-    β = p[2][2]
-    e = p[3][2]
-    fs = p[4][2]
-    s = p[5][2]
-    ft = p[6][2]
-    fq = p[7][2]
-    Ss = 0.6 #constant given in the article (#To verify)
-    Tr = 14. #given in the article (number of days of infection)
-
-    plot(solution.t,R) #plot(x,y)
-    plot(solution; dpi = 600, frame = :box)
+    plot(solution.t,R; dpi = 600, frame = :box) #plot(x,y)
     #savefig(joinpath("figures", "simulation_$(r0).png"))
     # TODO save data to a CSV file
 #end
-
 
 
 # ===> NOT WORKING RN ===>
@@ -86,13 +86,30 @@ tspan = (0.0, 100.0)
 
 # Estimate the number of cases C(t) 
 # Formula: CT(t) ≡ (Ss + sfTTR)[A(t)/Tr]
-@variables C(t)
 #C => [(Ss + s*ft*Tr) * (A/Tr) ] # C as vector with [] ?
 
-C ~ (Ss + s*ft*Tr) * (A/Tr)  # C
-plot(C)
+C = cumsum((Ss + _s*_ft*_Tr) * (A/_Tr))
+
+plot(solution.t,C)
+
+
+# Try with different R0 values --> Figure 2A
 
 
 
-#TODO
-Reff = r0 / (1 + 0.6 + s * ft * 14)
+#Figure 2B 
+# Calculate Reff
+#TODO: replace with parameters
+
+
+Reff = r0 / (1 + Ss + s * ft * Tr)
+
+# Find the R0 used for the numerical solution(eq 1-5)
+
+# Parameters
+R₀ = 
+
+# Expression 10 
+A = (Reff/1-Reff)*(NE₀*Tr/R₀)
+A = ((NE₀*Tr)/(1-Reff))*1/(1+Ss+s*ft*Tr)
+
