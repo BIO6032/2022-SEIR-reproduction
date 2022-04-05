@@ -59,8 +59,8 @@ tspan = (0.0, 100.0)
     S = solution[1,:]
     A = solution[2,:]
     I = solution[3,:]
-    R = solution[4,:]
-    Q = solution[5,:]
+    Q = solution[4,:]
+    R = solution[5,:]
 
     # Get Parameters values
     fr = p[1][2]
@@ -73,7 +73,7 @@ tspan = (0.0, 100.0)
     Ss = 0.6 #constant given in the article (#To verify)
     Tr = 14. #given in the article (number of days of infection)
 
-    plot(solution.t,S) #plot(x,y)
+    plot(solution.t,R) #plot(x,y)
     plot(solution; dpi = 600, frame = :box)
     #savefig(joinpath("figures", "simulation_$(r0).png"))
     # TODO save data to a CSV file
