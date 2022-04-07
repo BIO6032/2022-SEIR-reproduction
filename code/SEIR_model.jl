@@ -40,10 +40,10 @@ tspan = (0.0, 100.0)
 
 
 # Simulations
-#plot()
-#for r0 in 2:8
+plot()
+for r0 in 2:8
     # TODO formula for parameters from r0
-    r0 = 8.
+    #r0 = 8.
 
     # Get Parameters values
     _fr = 1. / 14.
@@ -82,8 +82,8 @@ tspan = (0.0, 100.0)
 
     
     C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
-    plot(solution.t,C, lab=r0)
-#end
+    plot!(solution.t,C, lab=r0)
+end
 xaxis!(tspan...)
 
 # Try with different R0 values --> Figure 2A
