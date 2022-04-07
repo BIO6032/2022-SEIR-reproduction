@@ -25,7 +25,7 @@ equations = [
     D(A) ~ β * S * A + β * S * I - fs * A - fr * A - s * ft * A + e * S,
     D(I) ~ fs * A - fr * I - fq * I,
     D(Q) ~ fq * I + s * ft * A - fr * Q,
-    D(R) ~ fr * Q + fr * I + fr * A,
+    D(R) ~ fr * Q + fr * I + fr * A
 ]
 
 # Problem 
@@ -40,23 +40,23 @@ tspan = (0.0, 100.0)
 
 
 # Simulations
-plot()
-for r0 in 2:8
+#plot()
+#for r0 in 2:8
     # TODO formula for parameters from r0
-    #r0 = 8.
+    r0 = 8.
 
     # Get Parameters values
-    _fr = 1/14
-    #_β = r0 * _fr / _Tr 
+    _fr = 1. / 14.
+    #_β = r0 * _fr / _N
     _N = S0+A0+I0+R0+Q0
-    _e = 4 / 10000
-    _fs = 0.6 * _fr
+    _e = 4. / _N 
+    _Ss = 0.6 
+    _Tr = 14. 
+    _fs = _Ss * _fr
     _s = 0.9
-    _ft = 2/7
-    _fq = 0.005
+    _ft = (2. /7.)*(1. /_Tr)
+    _fq = 0.9
     _β = (r0*(_fs+_fr+_s*_ft))/_N
-    _Ss = 0.6 #constant given in the article (#To verify)
-    _Tr = 14. #given in the article (number of days of infection)
 
 
     p = [
@@ -82,8 +82,8 @@ for r0 in 2:8
 
     
     C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
-    plot!(solution.t,C, lab=r0)
-end
+    plot(solution.t,C, lab=r0)
+#end
 xaxis!(tspan...)
 
 # Try with different R0 values --> Figure 2A
