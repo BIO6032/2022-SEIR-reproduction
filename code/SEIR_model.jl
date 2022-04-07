@@ -45,7 +45,7 @@ for r0 in 2:8
     # TODO formula for parameters from r0
     #r0 = 8.
 
-    # Get Parameters values
+    # Get Parameter values
     _fr = 1. / 14.
     #_β = r0 * _fr / _N
     _N = S0+A0+I0+R0+Q0
@@ -63,6 +63,7 @@ for r0 in 2:8
         fr => _fr,
         β => _β,
         e => _e,
+    
         fs => _fs,
         s => _s,
         ft => _ft,
@@ -83,10 +84,13 @@ for r0 in 2:8
     
     C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
     plot!(solution.t,C, lab=r0)
-end
-xaxis!(tspan...)
 
+xaxis!(tspan...)
+end
 # Try with different R0 values --> Figure 2A
+
+
+
 
 
 
@@ -94,15 +98,42 @@ xaxis!(tspan...)
 # Calculate Reff
 #TODO: replace with parameters
 
+@parameters i
+# Parameters
+_r₀ = [2:8]
+for i in _r₀
 
-Reff = r0 / (1 + Ss + s * ft * Tr)
+
+# Parameter values
+
+ _Ss = 0.6 
+ _Tr = 14. 
+ _s = 0.9
+ _ft = (2. /7.)*(1. /_Tr)
+ _NE₀ = 4.
+
+
+# Formula Reff
+Reff[i] = _r₀[i] / (1 + _Ss + _s * _ft * _Tr)
+
+_r₀ = collect(LinRange(1.0, 8.0, 100))
+Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
+A = (Reff./(1.0.-Reff)).*(_NE₀*_Tr./_r₀)
+
+plot(_r₀ , A)
+C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
+plot(Reff, C)
 
 # Find the R0 used for the numerical solution(eq 1-5)
 
-# Parameters
-R₀ = β*N/fr
 
 # Expression 10 
-A = (Reff/1-Reff)*(NE₀*Tr/R₀)
-A = ((NE₀*Tr)/(1-Reff))*1/(1+Ss+s*ft*Tr)
+A = (Reff[i]/1-Reff[i])*(_NE₀*_Tr/_r₀[i])
+#A = ((NE₀*Tr)/(1-Reff))*1/(1+Ss+s*ft*Tr)
 
+C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
+plot(Reff,C, lab=_r₀)
+
+
+
+end
