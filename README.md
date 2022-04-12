@@ -29,6 +29,11 @@ graph TD
     I --> b
     A --> b
 ```
+
+![figure SEIR](https://user-images.githubusercontent.com/101202074/161082911-c6775e5a-5d5b-48dd-a6fb-8870fb54b4bc.png)
+
+
+
 ### Intellectual property
 
 #### Article template
