@@ -100,8 +100,8 @@ end
 
 @parameters i
 # Parameters
-_r₀ = [2:8]
-for i in _r₀
+#_r₀ = [2:8]
+#for i in _r₀
 
 
 # Parameter values
@@ -114,7 +114,7 @@ for i in _r₀
 
 
 # Formula Reff
-Reff[i] = _r₀[i] / (1 + _Ss + _s * _ft * _Tr)
+#Reff[i] = _r₀[i] / (1 + _Ss + _s * _ft * _Tr)
 
 _r₀ = collect(LinRange(1.0, 8.0, 100))
 Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
@@ -128,11 +128,11 @@ plot(Reff, C)
 
 
 # Expression 10 
-A = (Reff[i]/1-Reff[i])*(_NE₀*_Tr/_r₀[i])
+#A = (Reff[i]/1-Reff[i])*(_NE₀*_Tr/_r₀[i])
 #A = ((NE₀*Tr)/(1-Reff))*1/(1+Ss+s*ft*Tr)
 
-C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
-plot(Reff,C, lab=_r₀)
+#C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
+#plot(Reff,C, lab=_r₀)
 
 
 
