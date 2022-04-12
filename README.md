@@ -16,19 +16,8 @@ Where susceptibles individuals belonging to the campus community S(t) become inf
 
 Infectious and symptomatic individuals are placed in quarantine Q(t) at rate fq, while infectious and asymptomatic individuals are placed in quarantine at rate ft when tested positive. The rate at which asymptomatic and infectious individuals are placed into quarantine is regulated by the parameter s which takes into account test sensitivity, indeterminate tests and individuals who miss their tests. Therefore, s is the fraction of I(t) Individuals detected as positive by the testing method and that directly goes into quarantine. All individuals recover at rate fr. 
 
-```mermaid
-graph TD
-    S[Susceptibles] --> b(transmission rate) --> A[Asymptomatiques]
-    A -->|symptomatic rate| I[Symptomatiques]
-    E[Exogenous] --> A
-    I -->|quarantine rate| Q[Quarantine]
-    A -->|testing rate| Q
-    A -->|recovery rate| R[Recovered]
-    Q -->|recovery rate| R
-    I -->|recovery rate| R
-    I --> b
-    A --> b
-```
+![figure_SEIR](https://user-images.githubusercontent.com/101202074/163003175-da10541f-b9f1-437b-942a-3e34f74038ae.png)
+
 ### Intellectual property
 
 #### Article template
