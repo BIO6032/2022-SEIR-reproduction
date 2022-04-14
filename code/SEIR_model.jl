@@ -54,7 +54,7 @@ for r0 in 2:8
     _Tr = 14. 
     _fs = _Ss * _fr
     _s = 0.9
-    _ft = (2. /7.)*(1. /_Tr)
+    _ft = (2. /7.)
     _fq = 0.9
     _β = (r0*(_fs+_fr+_s*_ft))/_N
 
@@ -80,11 +80,12 @@ for r0 in 2:8
     I = solution[3,:]
     Q = solution[4,:]
     R = solution[5,:]
-
     
-    C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
-    plot!(solution.t,C, lab=r0)
-
+    #C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
+    #plot!(solution.t,C, lab=r0)
+    vecN = repeat([_N], outer=length(S))
+    C_alt = vecN-S 
+    plot!(solution.t,C_alt, lab=r0)
 xaxis!(tspan...)
 end
 # Try with different R0 values --> Figure 2A
