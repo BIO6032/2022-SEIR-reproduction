@@ -45,10 +45,12 @@ equations = [
     # les asymptotiques reçoivent un taux B*S*A des symptomatiques moins le taux symptomatique perdues
     # aux infectueux, un testing rate perdues aux Quarantine et un recovery rate fr perdues aux Recovery   
     D(A) ~ β * S * A + β * S * I - fs * A - fr * A - s * ft * A + e * S,
-    # les infectueux reçoivent un taux symptomatiques fs des asymptomatiques et perdent un testing rate fr et un recovery rate fq
+    # les infectueux reçoivent un taux symptomatiques fs des asymptomatiques et perdent un recovery rate fr et un recovery rate fq
     D(I) ~ fs * A - fr * I - fq * I,
-    # les quarantined reçoivent      
+    # les quarantined reçoivent un quarantine rate fq des infectueux et un testing rate des asymptomatiques et perdent un recovery rate
+    # fq vers les quarantinedd      
     D(Q) ~ fq * I + s * ft * A - fr * Q,
+    # les recovered reçoivent un recover rate des quarantined, des infectueux et des asymptotiques
     D(R) ~ fr * Q + fr * I + fr * A
 ]
 
