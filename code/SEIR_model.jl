@@ -72,7 +72,7 @@ tspan = (0.0, 100.0)
 # Simulations
 # On génère une fenêtre de plot ne présentant que des axes ("vide")
 plot()
-r0_values = collect(LinRange(0.1, 2.0, 5))
+r0_values = collect(LinRange(0.1, 12.0, 20))
 r_eff = similar(r0_values)
 c_eff = similar(r0_values)
 
@@ -142,13 +142,16 @@ for (i,r0) in enumerate(r0_values)
     C_alt = vecN-S # formule qui calcule le nombre de cas positifs en fonction du temps
     plot!(solution.t,C_alt, lab="", line_z=r0, clim=(0.0, 2.0), c=:roma) # plot des différentes
 
+    maxA = maximum(A)
+
     r_eff[i] = r0 / (1 + _Ss + _s * _ft * _Tr)
 
-    c_eff[i] = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
-
+    c_eff[i] = (_Ss + _s*_ft*_Tr) * (maxA/_Tr)
 
 end
 xaxis!(tspan...)
+
+plot(r_eff, c_eff)
 
 
 # Figure 2B
