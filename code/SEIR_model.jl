@@ -72,7 +72,7 @@ tspan = (0.0, 100.0)
 # Simulations
 # On génère une fenêtre de plot ne présentant que des axes ("vide")
 plot()
-r0_values = collect(LinRange(1.0, 12.0, 200))
+r0_values = collect(LinRange(0.1, 8.0, 200))
 r_eff = similar(r0_values)
 c_eff = similar(r0_values)
 
@@ -156,7 +156,7 @@ plot(r_eff, c_eff)
 
 # Figure 2B
 
-R₀ = LinRange(1.0, 8.0, 200)
+R₀ = LinRange(0.1, 8.0, 200)
 x = fill(NaN, length(R₀))
 y = fill(NaN, length(R₀))
 
