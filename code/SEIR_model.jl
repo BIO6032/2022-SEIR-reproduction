@@ -196,4 +196,11 @@ plot!(r_eff,c_eff, c=:blue, lab="Numerical solution")
 # Find the R0 used for the numerical solution(eq 1-5)
 
 
+### Figure 3
 
+# Importer les données
+
+# ecrire equation #7 + p(t) + R contact tracing pour 3b
+
+
+#Figures
