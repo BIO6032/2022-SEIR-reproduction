@@ -153,7 +153,6 @@ xaxis!(tspan...)
 
 plot(r_eff, c_eff)
 
-
 # Figure 2B
 
 R₀ = LinRange(0.1, 8.0, 200)
