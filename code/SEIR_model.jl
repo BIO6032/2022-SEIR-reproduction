@@ -155,18 +155,42 @@ plot(r_eff, c_eff)
 
 
 # Figure 2B
-_NE₀ = 4.
-for _r₀ = collect(LinRange(1.0, 8.0, 100))
 
-Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
-A = (Reff./(1.0.-Reff)).*(_NE₀*_Tr./_r₀)
-C = cumsum((_Ss + _s*_ft*_Tr) * (A/_Tr))
+R₀ = LinRange(1.0, 8.0, 200)
+x = fill(NaN, length(R₀))
+y = fill(NaN, length(R₀))
 
-plot(Reff , C)
-plot(Reff, C, xlims = (0.0,1.0))
+for (i,_r₀) in enumerate(R₀)
+
+    # paramètres
+    _NE₀ = 4.
+    _Ss = 0.6
+    _s = 0.9
+    _ft = (2. /7.)
+    _Tr = 14.
+
+
+    Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
+    A = (Reff./(1.0.-Reff)).*(_NE₀*_Tr./_r₀)
+
+
+    C = (_Ss + _s*_ft*_Tr) * (A/_Tr)
+
+    if C < 0 
+        break
+    end
+
+    x[i] = Reff
+    y[i] = C
 
 end 
 
+_last_valid_idx = findfirst(isnan, y)
+x = x[1:_last_valid_idx]
+y = y[1:_last_valid_idx]
+
+plot(x,y, legend=:bottomleft, frame=:box)
+plot!(r_eff,c_eff)
 # Try with different R0 values --> Figure 2A
 
 # Find the R0 used for the numerical solution(eq 1-5)
