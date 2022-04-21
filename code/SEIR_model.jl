@@ -72,7 +72,7 @@ tspan = (0.0, 100.0)
 # Simulations
 # On génère une fenêtre de plot ne présentant que des axes ("vide")
 plot()
-r0_values = collect(LinRange(0.1, 12.0, 20))
+r0_values = collect(LinRange(1.0, 12.0, 200))
 r_eff = similar(r0_values)
 c_eff = similar(r0_values)
 
@@ -186,11 +186,12 @@ for (i,_r₀) in enumerate(R₀)
 end 
 
 _last_valid_idx = findfirst(isnan, y)
+_last_valid_idx = isnothing(_last_valid_idx) ? length(y) : _last_valid_idx
 x = x[1:_last_valid_idx]
 y = y[1:_last_valid_idx]
 
-plot(x,y, legend=:bottomleft, frame=:box)
-plot!(r_eff,c_eff)
+plot(x,y, legend=:bottomright, frame=:box, c=:red, lab="Asymptotic expression")
+plot!(r_eff,c_eff, c=:blue, lab="Numerical solution")
 # Try with different R0 values --> Figure 2A
 
 # Find the R0 used for the numerical solution(eq 1-5)
