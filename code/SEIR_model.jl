@@ -221,3 +221,6 @@ D(A) ~ r0/_Tr * (1- (1/Reff))*A + _NE₀ * p
 #Figures
 plot(df[:,1], df[:,3], frame=:box, lab="daily cases", 
 xaxis="date", yaxis="Daily cases")
+
+
+
