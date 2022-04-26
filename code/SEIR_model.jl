@@ -10,7 +10,9 @@ using Plots
 
 # Data
 using DataFrames
-using CSV:CSV
+using CSV
+
+
 
 # Parameters 
 @parameters t β e fs fr s ft fq
@@ -199,6 +201,9 @@ plot!(r_eff,c_eff, c=:blue, lab="Numerical solution")
 ### Figure 3
 
 # Importer les données
+
+CSV.read("suffolk_county_data.csv", DataFrame)
+suffolk = readdlm("suffolk_county_data.csv", ',', Float64)
 
 # ecrire equation #7 + p(t) + R contact tracing pour 3b
 
