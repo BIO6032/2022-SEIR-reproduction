@@ -202,10 +202,10 @@ plot!(r_eff,c_eff, c=:blue, lab="Numerical solution")
 
 # Importer les données
 
-CSV.read("suffolk_county_data.csv", DataFrame)
-suffolk = readdlm("suffolk_county_data.csv", ',', Float64)
+DataFrame(CSV.File(joinpath("data", "suffolk_county_data.csv")))
 
 # ecrire equation #7 + p(t) + R contact tracing pour 3b
-
+p = 
+D(A) ~ R₀/_Tr * (1- (1/Reff))*A + _NE₀ * p
 
 #Figures
