@@ -232,7 +232,65 @@ _r₀ = 2.5
 Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
 A = (Reff./(1.0.-Reff)).*(_NE₀*_Tr./_r₀)
 
-D(A) ~ _r₀ /_Tr * (1- (1/Reff))* A + _NE₀ * _p
+D(A) ~ _r₀ /_Tr * (1- (1/Reff))* A + _NE₀
 
 
 
+### New system
+
+@parameters t β e fs fr s ft fq r₀ Tr Reff NE₀
+
+D = Differential(t)
+
+equations_alt = [
+
+    D(S) ~ -β * S * A - β * S * I - e * S,
+    D(A) ~ r₀ /Tr * (1- (1/Reff))* A + NE₀,
+    D(I) ~ fs * A - fr * I - fq * I,
+    D(Q) ~ fq * I + s * ft * A - fr * Q,
+    D(R) ~ fr * Q + fr * I + fr * A
+]
+
+@named seir_alt = ODESystem(equations_alt)
+S0 = 9999.
+A0 = 1.
+I0 = 0.
+R0 = 0.
+Q0 = 0.
+u0 = [S => S0, A => A0, I => I0, R => R0, Q => Q0]
+
+
+_fr = 1. / 14.
+_N = S0+A0+I0+R0+Q0
+_e = 4. / _N 
+_Ss = 0.6 
+_Tr = 14. 
+_fs = _Ss * _fr
+_s = 0.9
+_ft = (2. /7.)
+_fq = 0.9
+_r₀ = 2.5
+_β = (_r₀*(_fs+_fr+_s*_ft))/_N
+_Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
+_NE₀ = 4.
+
+p_alt = [
+    fr => _fr,
+    β => _β,
+    e => _e,
+    fs => _fs,
+    Ss => _Ss,
+    s => _s,
+    ft => _ft,
+    fq => _fq,
+    r₀ => _r₀,
+    NE₀ => _NE₀,
+    Tr => _Tr,
+    Reff => _Reff
+]
+
+problem_alt = ODEProblem(seir_alt, u0, tspan, p_alt) 
+   
+# Résout le problème définit à la ligne précédente
+solution_alt = solve(problem_alt)
+plot(D(A),solution_alt)
