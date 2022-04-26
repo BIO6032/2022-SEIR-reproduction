@@ -203,8 +203,14 @@ plot!(r_eff,c_eff, c=:blue, lab="Numerical solution")
 # Importer les données
 
 df = DataFrame(CSV.File(joinpath("data", "suffolk_county_data.csv")))
+
+#Figure 3A pour les cas cumulatifs 
 scatter(df[:,1], df[:,5], frame=:box, lab="cummulative cases", 
 xaxis="date", yaxis="Positive cases")
+
+#Figures 3B pour les daily cases 
+plot(df[:,1], df[:,3], frame=:box, lab="daily cases", 
+xaxis="date", yaxis="Daily cases")
 
 # ecrire equation #7 + p(t) + R contact tracing pour 3b
 
@@ -214,13 +220,19 @@ P₀
 #p = P₀ * δ * (t-tp)
 
 
+# paramètres
 _NE₀ = 4.
-p = 1
-D(A) ~ r0/_Tr * (1- (1/Reff))*A + _NE₀ * p
+_Ss = 0.6
+_s = 0.9
+_ft = (2. /7.)
+_Tr = 14.
+_p = 1.
+_r₀ = 2.5
 
-#Figures
-plot(df[:,1], df[:,3], frame=:box, lab="daily cases", 
-xaxis="date", yaxis="Daily cases")
+Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
+A = (Reff./(1.0.-Reff)).*(_NE₀*_Tr./_r₀)
+
+D(A) ~ _r₀ /_Tr * (1- (1/Reff))* A + _NE₀ * _p
 
 
 
