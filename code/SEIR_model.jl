@@ -202,10 +202,16 @@ plot!(r_eff,c_eff, c=:blue, lab="Numerical solution")
 
 # Importer les données
 
-DataFrame(CSV.File(joinpath("data", "suffolk_county_data.csv")))
+df = DataFrame(CSV.File(joinpath("data", "suffolk_county_data.csv")))
+scatter(df[:,1], df[:,4], frame=:box, lab="cummulative cases", 
+xaxis=:"date", yaxis=:"Positive cases")
 
 # ecrire equation #7 + p(t) + R contact tracing pour 3b
-p = 
-D(A) ~ R₀/_Tr * (1- (1/Reff))*A + _NE₀ * p
+
+P₀
+δ
+
+p = P₀ * δ * (t-tp)
+D(A) ~ r0/_Tr * (1- (1/Reff))*A + _NE₀ * p
 
 #Figures
