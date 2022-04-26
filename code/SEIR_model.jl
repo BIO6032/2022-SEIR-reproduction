@@ -45,7 +45,7 @@ equations = [
     # moins B*S*I perdues vers les infectueux et e*S d'exogenou
     D(S) ~ -β * S * A - β * S * I - e * S,
     # les asymptotiques reçoivent un taux B*S*A des symptomatiques moins le taux symptomatique perdues
-    # aux infectueux, un testing rate perdues aux Quarantine et un recovery rate fr perdues aux Recovery   
+    # aux infectieux, un testing rate perdues aux Quarantine et un recovery rate fr perdues aux Recovery   
     D(A) ~ β * S * A + β * S * I - fs * A - fr * A - s * ft * A + e * S,
     # les infectueux reçoivent un taux symptomatiques fs des asymptomatiques et perdent un recovery rate fr et un recovery rate fq
     D(I) ~ fs * A - fr * I - fq * I,
