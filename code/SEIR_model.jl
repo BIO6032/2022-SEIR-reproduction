@@ -213,7 +213,6 @@ plot(
 #p = P₀ * δ * (t-tp) mais on considère que p=1 ici
 
 ### Système alternatif avec D(A) = equation 7
-
 @parameters t β e fs fr s ft fq r₀ Tr Reff NE₀ Ss
 @variables S(t) A(t) I(t) R(t) Q(t)
 
@@ -277,4 +276,8 @@ I = solution_alt[3, :]
 Q = solution_alt[4, :]
 R = solution_alt[5, :]
 
-plot(solution_alt.t, A)
+# Positive cases fig3a (r₀=2.5 blue dash)
+plot(solution_alt.t, ... , color=:blue, linestyle=:dash)
+
+# Daily cases fig3b (r₀=2.5 black)
+plot(solution_alt.t, ... , color=:black, linestyle=:solid)
