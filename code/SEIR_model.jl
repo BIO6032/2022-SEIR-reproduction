@@ -289,3 +289,7 @@ plot(solution_alt.t, ... , color=:black, linestyle=:solid)
 
 
 # TODO: superposer les plots des fig 3
+# TODO: get plot for r0=3.8 , 5., 6.5 (boucles?)
+
+
+
