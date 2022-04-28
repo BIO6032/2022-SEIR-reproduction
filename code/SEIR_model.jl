@@ -286,3 +286,6 @@ lab = "r₀=2.5",color=:blue, linestyle=:dash) # cas cumulatifs au cours du temp
 
 # Daily cases fig3b (r₀=2.5 black)
 plot(solution_alt.t, ... , color=:black, linestyle=:solid)
+
+
+# TODO: superposer les plots des fig 3
