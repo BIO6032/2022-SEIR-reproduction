@@ -276,8 +276,13 @@ I = solution_alt[3, :]
 Q = solution_alt[4, :]
 R = solution_alt[5, :]
 
+vecN_alt = repeat([_N], outer = length(S)) 
+C = vecN_alt - S # formule qui calcule le nombre de cas positifs en fonction du temps
+
 # Positive cases fig3a (r₀=2.5 blue dash)
-plot(solution_alt.t, ... , color=:blue, linestyle=:dash)
+plot(solution_alt.t, C,      yaxis = "Positive cases (cum)",
+lab = "r₀=2.5",color=:blue, linestyle=:dash) # cas cumulatifs au cours du temps
+
 
 # Daily cases fig3b (r₀=2.5 black)
 plot(solution_alt.t, ... , color=:black, linestyle=:solid)
