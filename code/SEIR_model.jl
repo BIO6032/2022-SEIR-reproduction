@@ -212,20 +212,6 @@ plot(
 # ecrire equation #7 + p(t) + R contact tracing pour 3b
 #p = P₀ * δ * (t-tp) mais on considère que p=1 ici
 
-# paramètres
-_NE₀ = 4.0
-_Ss = 0.6
-_s = 0.9
-_ft = (2.0 / 7.0)
-_Tr = 14.0
-_p = 1.0
-_r₀ = 2.5
-
-Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
-A = (Reff ./ (1.0 .- Reff)) .* (_NE₀ * _Tr ./ _r₀)
-
-D(A) ~ _r₀ / _Tr * (1 - (1 / Reff)) * A + _NE₀
-
 ### Système alternatif avec D(A) = equation 7
 
 @parameters t β e fs fr s ft fq r₀ Tr Reff NE₀ Ss
