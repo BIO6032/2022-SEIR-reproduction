@@ -136,6 +136,8 @@ for (i, r0) in enumerate(r0_values)
 
     c_eff[i] = (_Ss + _s * _ft * _Tr) * (maxA / _Tr)
 
+    plot(solution.t, A,      yaxis = "Positive cases (cum)",
+lab = "r₀=2.5",color=:blue, linestyle=:dash)
 end
 xaxis!(tspan...)
 
@@ -185,9 +187,21 @@ plot!(r_eff, c_eff, c = :blue, lab = "Numerical solution")
 # Importer les données
 df = DataFrame(CSV.File(joinpath("data", "suffolk_county_data.csv")))
 
+#Figures 3B pour les daily cases 
+plot(
+    df[:, 6],
+    df[:, 3],
+    frame = :box,
+    lab = "daily cases",
+    xaxis = "tspan",
+    yaxis = "Daily cases",
+    color = :black,
+    linestyle = :dash,
+)
+
 #Figure 3A pour les cas cumulatifs 
 plot(
-    df[:, 1],
+    df[:, 6],
     df[:, 5],
     frame = :box,
     lab = "cummulative cases",
@@ -196,19 +210,6 @@ plot(
     color = :black,
     linestyle = :solid,
 )
-
-#Figures 3B pour les daily cases 
-plot(
-    df[:, 1],
-    df[:, 3],
-    frame = :box,
-    lab = "daily cases",
-    xaxis = "date",
-    yaxis = "Daily cases",
-    color = :black,
-    linestyle = :dash,
-)
-
 # ecrire equation #7 + p(t) + R contact tracing pour 3b
 #p = P₀ * δ * (t-tp) mais on considère que p=1 ici
 
@@ -280,7 +281,7 @@ vecN_alt = repeat([_N], outer = length(S))
 C = vecN_alt - S # formule qui calcule le nombre de cas positifs en fonction du temps
 
 # Positive cases fig3a (r₀=2.5 blue dash)
-plot(solution_alt.t, C,      yaxis = "Positive cases (cum)",
+plot!(solution_alt.t, C,      yaxis = "Positive cases (cum)",
 lab = "r₀=2.5",color=:blue, linestyle=:dash) # cas cumulatifs au cours du temps
 
 
@@ -290,6 +291,74 @@ plot(solution_alt.t, ... , color=:black, linestyle=:solid)
 
 # TODO: superposer les plots des fig 3
 # TODO: get plot for r0=3.8 , 5., 6.5 (boucles?)
+@parameters t β e fs fr s ft fq r₀ Tr Reff NE₀ Ss
+@variables S(t) A(t) I(t) R(t) Q(t)
 
+D = Differential(t)
+
+equations_alt = [
+    D(S) ~ -β * S * A - β * S * I - e * S,
+    D(A) ~ r₀ / Tr * (1 - (1 / Reff)) * A + NE₀,
+    D(I) ~ fs * A - fr * I - fq * I,
+    D(Q) ~ fq * I + s * ft * A - fr * Q,
+    D(R) ~ fr * Q + fr * I + fr * A,
+]
+
+@named seir_alt = ODESystem(equations_alt)
+S0 = 9999.0
+A0 = 1.0
+I0 = 0.0
+R0 = 0.0
+Q0 = 0.0
+u0 = [S => S0, A => A0, I => I0, R => R0, Q => Q0]
+
+## avec r₀=2.5
+_fr = 1.0 / 14.0
+_N = S0 + A0 + I0 + R0 + Q0
+_e = 4.0 / _N
+_Ss = 0.6
+_Tr = 14.0
+_fs = _Ss * _fr
+_s = 0.9
+_ft = (2.0 / 7.0)
+_fq = 0.9
+_r₀ = 3.8
+_β = (_r₀ * (_fs + _fr + _s * _ft)) / _N
+_Reff = _r₀ ./ (1 + _Ss + _s * _ft * _Tr)
+_NE₀ = 4.0
+
+p_alt = [
+    fr => _fr,
+    β => _β,
+    e => _e,
+    fs => _fs,
+    Ss => _Ss,
+    s => _s,
+    ft => _ft,
+    fq => _fq,
+    r₀ => _r₀,
+    NE₀ => _NE₀,
+    Tr => _Tr,
+    Reff => _Reff,
+]
+
+problem_alt = ODEProblem(seir_alt, u0, tspan, p_alt)
+
+# Résout le problème définit à la ligne précédente
+solution_alt = solve(problem_alt)
+
+# Assign values to each compartment over time - stockage des valeurs des variables dans chaque compartiment à partir de la solution
+S = solution_alt[1, :] # Dans l'objet solution prendre le 1er élément à tous les pas de temps
+A = solution_alt[2, :]
+I = solution_alt[3, :]
+Q = solution_alt[4, :]
+R = solution_alt[5, :]
+
+vecN_alt = repeat([_N], outer = length(S)) 
+C = vecN_alt - S # formule qui calcule le nombre de cas positifs en fonction du temps
+
+# Positive cases fig3a (r₀=2.5 blue dash)
+plot!(solution_alt.t, C,      yaxis = "Positive cases (cum)",
+lab = "r₀=3.8",color=:blue, linestyle=:solid)
 
 
