@@ -1,5 +1,5 @@
 # Simulations
-using DifferentialEquations
+using DifferentialEquations 
 using OrdinaryDiffEq
 #Permet de résoudre des équations différentielles 
 using ModelingToolkit
@@ -205,12 +205,12 @@ plot!(r_eff,c_eff, c=:blue, lab="Numerical solution")
 df = DataFrame(CSV.File(joinpath("data", "suffolk_county_data.csv")))
 
 #Figure 3A pour les cas cumulatifs 
-scatter(df[:,1], df[:,5], frame=:box, lab="cummulative cases", 
-xaxis="date", yaxis="Positive cases")
+plot(df[:,1], df[:,5], frame=:box, lab="cummulative cases", 
+xaxis="date", yaxis="Positive cases", color=:black, linestyle=:solid)
 
 #Figures 3B pour les daily cases 
 plot(df[:,1], df[:,3], frame=:box, lab="daily cases", 
-xaxis="date", yaxis="Daily cases")
+xaxis="date", yaxis="Daily cases", color=:black, linestyle=:dash)
 
 # ecrire equation #7 + p(t) + R contact tracing pour 3b
 
@@ -238,14 +238,14 @@ D(A) ~ _r₀ /_Tr * (1- (1/Reff))* A + _NE₀
 
 ### New system
 
-@parameters t β e fs fr s ft fq r₀ Tr Reff NE₀
+@parameters t β e fs fr s ft fq r₀ Tr Reff NE₀ Ss
+@variables S(t) A(t) I(t) R(t) Q(t) 
 
 D = Differential(t)
 
 equations_alt = [
-
     D(S) ~ -β * S * A - β * S * I - e * S,
-    D(A) ~ r₀ /Tr * (1- (1/Reff))* A + NE₀,
+    D(A) ~ r₀ / Tr * (1- (1/Reff))* A + NE₀,
     D(I) ~ fs * A - fr * I - fq * I,
     D(Q) ~ fq * I + s * ft * A - fr * Q,
     D(R) ~ fr * Q + fr * I + fr * A
@@ -293,4 +293,15 @@ problem_alt = ODEProblem(seir_alt, u0, tspan, p_alt)
    
 # Résout le problème définit à la ligne précédente
 solution_alt = solve(problem_alt)
-plot(D(A),solution_alt)
+
+M = solution_alt[1:end,:] # Matrix of results 5 compartments x 31 time steps - crée une matrice qui va être utilisée pour stocker les valeurs obtenus
+# des variables au cours du temps
+
+# Assign values to each compartment over time - stockage des valeurs des variables dans chaque compartiment à partir de la solution
+S = solution_alt[1,:] # Dans l'objet solution prendre le 1er élément à tous les pas de temps
+A = solution_alt[2,:]
+I = solution_alt[3,:]
+Q = solution_alt[4,:]
+R = solution_alt[5,:]
+
+plot(solution_alt.t, A)
