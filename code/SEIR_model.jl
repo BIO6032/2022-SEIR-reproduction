@@ -187,18 +187,6 @@ plot!(r_eff, c_eff, c = :blue, lab = "Numerical solution")
 # Importer les données
 df = DataFrame(CSV.File(joinpath("data", "suffolk_county_data.csv")))
 
-#Figures 3B pour les daily cases 
-plot(
-    df[:, 6],
-    df[:, 3],
-    frame = :box,
-    lab = "daily cases",
-    xaxis = "tspan",
-    yaxis = "Daily cases",
-    color = :black,
-    linestyle = :dash,
-)
-
 #Figure 3A pour les cas cumulatifs 
 plot(
     df[:, 6],
@@ -360,5 +348,25 @@ C = vecN_alt - S # formule qui calcule le nombre de cas positifs en fonction du 
 # Positive cases fig3a (r₀=2.5 blue dash)
 plot!(solution_alt.t, C,      yaxis = "Positive cases (cum)",
 lab = "r₀=3.8",color=:blue, linestyle=:solid)
+
+
+
+#Figures 3B pour les daily cases 
+plot(
+    df[:, 6],
+    df[:, 3],
+    frame = :box,
+    lab = "daily cases",
+    xaxis = "tspan",
+    yaxis = "Daily cases",
+    color = :black,
+    linestyle = :dash,
+)
+
+
+
+
+
+
 
 
