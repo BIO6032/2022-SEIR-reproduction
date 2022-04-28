@@ -265,6 +265,15 @@ I = solution_alt[3, :]
 Q = solution_alt[4, :]
 R = solution_alt[5, :]
 
+
+Daily = repeat([NaN], outer = length(A)-1)
+for i in 2:length(A)
+Daily[i-1] = A[i]-A[i-1]
+end
+Daily
+
+plot(solution_alt.t[2:end], Daily, yaxis = "Daily cases", color=:red)
+
 vecN_alt = repeat([_N], outer = length(S)) 
 C = vecN_alt - S # formule qui calcule le nombre de cas positifs en fonction du temps
 
@@ -348,7 +357,6 @@ C = vecN_alt - S # formule qui calcule le nombre de cas positifs en fonction du 
 # Positive cases fig3a (r₀=2.5 blue dash)
 plot!(solution_alt.t, C,      yaxis = "Positive cases (cum)",
 lab = "r₀=3.8",color=:blue, linestyle=:solid)
-
 
 
 #Figures 3B pour les daily cases 
