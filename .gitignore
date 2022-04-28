@@ -8,4 +8,5 @@
 *.bcf
 *.run.xml
 *.out
-
+Manifest.toml
+.vscode/settings.json
